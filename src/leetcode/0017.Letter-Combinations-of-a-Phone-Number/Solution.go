@@ -38,4 +38,38 @@ func getCombinations(a, b []string) []string {
 	return ret
 }
 
-//第二种
+//第二种  回溯
+var digtalMap map[string]string = map[string]string{
+	"2": "abc",
+	"3": "def",
+	"4": "ghi",
+	"5": "jkl",
+	"6": "mno",
+	"7": "pqrs",
+	"8": "tuv",
+	"9": "wxyz",
+}
+var combinations []string
+
+func letterCombinations2(digits string) []string {
+	if len(digits) == 0 {
+		return []string{}
+	}
+	combinations = []string{}
+	backtrack(digits, 0, "")
+	return combinations
+}
+
+func backtrack(digits string, index int, combination string) {
+	if len(digits) == index {
+		combinations = append(combinations, combination)
+	} else {
+		digit := string(digits[index])
+		letters := digtalMap[digit]
+		letterCount := len(letters)
+		for i := 0; i < letterCount; i++ {
+			backtrack(digits, index+1, combination+string(letters[i]))
+		}
+	}
+
+}

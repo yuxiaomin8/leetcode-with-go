@@ -46,7 +46,8 @@ func Test_Problem(t *testing.T) {
 
 	for _, q := range qs {
 		_, p := q.ans, q.para
-		fmt.Printf("【input】:%v       【output】:%v\n", p, letterCombinations(p.one))
+		//fmt.Printf("【input】:%v       【output】:%v\n", p, letterCombinations(p.one))
+		fmt.Printf("【input】:%v       【output】:%v\n", p, letterCombinations2(p.one))
 	}
 	fmt.Printf("\n\n\n")
 }

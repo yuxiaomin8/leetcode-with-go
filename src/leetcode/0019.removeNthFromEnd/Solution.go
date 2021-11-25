@@ -1,33 +1,42 @@
 package leetcode
 
-import "sort"
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
 
-func fourSum(nums []int, target int) (quadruplets [][]int) {
-	sort.Ints(nums)
-	n := len(nums)
-	for i := 0; i < n-3 && nums[i]+nums[i+1]+nums[i+2]+nums[i+3] <= target; i++ {
-		if i > 0 && nums[i] == nums[i-1] || nums[i]+nums[n-3]+nums[n-2]+nums[n-1] < target {
-			continue
-		}
-		for j := i + 1; j < n-2 && nums[i]+nums[j+1]+nums[j+2]+nums[j+3] < target; j++ {
-			if j > i+1 && nums[j] == nums[j-1] || nums[i]+nums[j]+nums[n-1]+nums[n-2] < target {
-				continue
-			}
-			for left, right := j+1, n-1; left < right; {
-				if sum := nums[i] + nums[j] + nums[left] + nums[right]; sum == target {
-					quadruplets = append(quadruplets, []int{nums[i], nums[j], nums[left], nums[right]})
-
-					for left++; left < right && nums[left] == nums[left-1]; left++ {
-					}
-					for right--; left < right && nums[right] == nums[right+1]; right-- {
-					}
-				} else if sum < target {
-					left++
-				} else {
-					right--
-				}
-			}
-		}
+/***
+解法一
+*/
+//func getLength(head *ListNode)(length int){
+//	for ;head!=nil;head=head.Next{
+//		length++
+//	}
+//	return
+//}
+//
+//func removeNthFromEnd(head *ListNode, n int) *ListNode {
+//	length:=getLength(head)
+//	dummy:=&ListNode{0,head}
+//	cur:=dummy
+//	for i:=0;i<length-n;i++{
+//		cur=cur.Next
+//	}
+//	cur.Next=cur.Next.Next
+//	return dummy.Next
+//}
+/**
+解法2
+双指针算法
+*/
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	dummy := &ListNode{0, head}
+	first, second := head, dummy
+	for i := 0; i < n; i++ {
+		first = first.Next
 	}
-	return
+	for ; first != nil; first = first.Next {
+		second = second.Next
+	}
+	return second
 }

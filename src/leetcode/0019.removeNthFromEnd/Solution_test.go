@@ -2,8 +2,14 @@ package leetcode
 
 import (
 	"fmt"
+	"github.com/yuxiaomin8/leetcode-with-go/src/structures"
 	"testing"
 )
+
+//type ListNode struct {
+//	Val int
+//	Next *ListNode
+//}
 
 type question struct {
 	para
@@ -14,34 +20,69 @@ type question struct {
 // one 代表第一个参数
 type para struct {
 	one []int
-	two int
+	n   int
 }
 
 // ans 是答案
 // one 代表第一个答案
 type ans struct {
-	one [][]int
+	one []int
 }
 
 func Test_Problem(t *testing.T) {
 
 	qs := []question{
+
 		{
-			para{[]int{1, 0, -1, 0, -2, 2}, 8},
-			ans{[][]int{{-2, -1, 1, 2}, {-2, 0, 0, 2}, {-1, 0, 0, 1}}},
+			para{[]int{1}, 3},
+			ans{[]int{1}},
 		},
 
 		{
-			para{[]int{1, 0, -1, 0, -2, 2, 0, 0, 0, 0}, 1},
-			ans{[][]int{{-1, 0, 0, 2}, {-2, 0, 1, 2}, {0, 0, 0, 1}}},
+			para{[]int{1, 2}, 2},
+			ans{[]int{2}},
+		},
+
+		{
+			para{[]int{1}, 1},
+			ans{[]int{}},
+		},
+
+		{
+			para{[]int{1, 2, 3, 4, 5}, 10},
+			ans{[]int{1, 2, 3, 4, 5}},
+		},
+
+		{
+			para{[]int{1, 2, 3, 4, 5}, 1},
+			ans{[]int{1, 2, 3, 4}},
+		},
+
+		{
+			para{[]int{1, 2, 3, 4, 5}, 2},
+			ans{[]int{1, 2, 3, 5}},
+		},
+
+		{
+			para{[]int{1, 2, 3, 4, 5}, 3},
+			ans{[]int{1, 2, 4, 5}},
+		},
+		{
+			para{[]int{1, 2, 3, 4, 5}, 4},
+			ans{[]int{1, 3, 4, 5}},
+		},
+
+		{
+			para{[]int{1, 2, 3, 4, 5}, 5},
+			ans{[]int{2, 3, 4, 5}},
 		},
 	}
 
-	fmt.Printf("------------------------Leetcode Problem 0018------------------------\n")
+	fmt.Printf("------------------------Leetcode Problem 0019------------------------\n")
 
 	for _, q := range qs {
 		_, p := q.ans, q.para
-		fmt.Printf("【input】:%v       【output】:%v\n", p, fourSum(p.one, p.two))
+		fmt.Printf("【input】:%v       【output】:%v\n", p, structures.List2Ints(removeNthFromEnd(structures.Ints2List(p.one), p.n)))
 	}
 	fmt.Printf("\n\n\n")
 }
